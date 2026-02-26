@@ -1,0 +1,55 @@
+<html lang="en">
+<head>
+    <%- include("partials/header") %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body class="artists-page">
+<%- include("partials/navbar") %>
+
+<section class="split-showcase">
+<div class="artist-panel panel-left">
+    <div class="panel-bg" style="background-image: url('/images/artist1_full.jpg');"></div>
+    <div class="panel-content">
+        <span class="artist-number">01</span>
+        <h2 class="artist-name">William<br>Jakrapatr</h2>
+        <p class="artist-bio">T-Pop’s celebrated ‘lungs’ and a compelling actor, merging powerhouse vocals with emotive on-screen storytelling</p>
+        <a href="/artists/1" class="view-works">Explore more</a>
+    </div>
+</div>
+
+<div class="artist-panel panel-right">
+    <div class="panel-bg" style="background-image: url('/images/artist2_full.jpg');"></div>
+    <div class="panel-content">
+        <span class="artist-number">02</span>
+        <h2 class="artist-name">Est<br>Supha</h2>
+        <p class="artist-bio">national swimmer, actor, and model making waves in every field he touches.</p>
+        <a href="/artists/2" class="view-works">Explore more</a>
+    </div>
+</div>
+</section>
+
+<%- include("partials/footer") %>
+
+<script>
+    // Parallax & Hover Animation
+    gsap.utils.toArray('.artist-panel').forEach(panel => {
+        const bg = panel.querySelector('.panel-bg');
+        
+        panel.addEventListener('mouseenter', () => {
+            gsap.to(bg, { scale: 1.1, duration: 1.5, ease: "expo.out" });
+            gsap.to(panel.querySelector('.panel-content'), { y: -20, duration: 0.6 });
+        });
+
+        panel.addEventListener('mouseleave', () => {
+            gsap.to(bg, { scale: 1, duration: 1.5, ease: "expo.out" });
+            gsap.to(panel.querySelector('.panel-content'), { y: 0, duration: 0.6 });
+        });
+    });
+
+    // Entrance Animation
+    gsap.from(".panel-left", { xPercent: -100, duration: 1.5, ease: "power4.inOut" });
+    gsap.from(".panel-right", { xPercent: 100, duration: 1.5, ease: "power4.inOut" }, "<");
+</script>
+</body>
+</html>

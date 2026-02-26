@@ -1,0 +1,66 @@
+<html lang="en">
+<head>
+    <%- include("partials/header") %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body style="background: #050505; color: #fff; display: flex; flex-direction: column; min-height: 100vh; margin: 0;">
+    <%- include("partials/navbar") %>
+
+    <main style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 60px 20px;">
+        <section class="page-section" style="width: 100%; max-width: 600px;">
+            
+            <div class="glass-card" style="padding: 50px; background: rgba(255,255,255,0.02); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 30px; text-align: center;">
+                
+                <div class="dev-initials" style="width: 80px; height: 80px; line-height: 80px; border-radius: 20px; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); margin: 0 auto 30px; font-family: 'Syne'; font-size: 2rem; font-weight: 800; color: #000; box-shadow: 0 10px 30px rgba(79, 172, 254, 0.2);">
+                    SP
+                </div>
+
+                <h2 style="font-family: 'Syne'; font-size: 2.2rem; margin: 0; letter-spacing: -1px;">SONIKA P</h2>
+                <p style="color: #4facfe; letter-spacing: 4px; font-size: 0.8rem; margin-top: 10px; font-weight: bold; text-transform: uppercase;">
+                    Cybersecurity student
+                </p>
+
+                <div style="width: 30px; height: 2px; background: #333; margin: 30px auto;"></div>
+
+                <p class="about-text" style="line-height: 1.8; opacity: 0.7; font-size: 1.05rem; margin-bottom: 40px;">
+                    Crafting digital spaces for the stories we love. <br>
+                    Created with ❤️ for the BL community.
+                </p>
+
+                <div class="dev-socials" style="display: flex; gap: 40px; justify-content: center;">
+                    <a href="hhttps://www.instagram.com/_sonika_p_/" target="_blank" style="color: #fff; font-size: 1.8rem; text-decoration: none; transition: 0.3s;">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://x.com/Willyfan98" target="_blank" style="color: #fff; font-size: 1.8rem; text-decoration: none; transition: 0.3s;">
+                        <i class="fab fa-x-twitter"></i>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <%- include("partials/footer") %>
+
+    <script>
+        // Smooth entrance for the card
+        gsap.from(".glass-card", {
+            duration: 1.2,
+            y: 30,
+            opacity: 0,
+            ease: "expo.out"
+        });
+
+        // Hover animations for the icons
+        document.querySelectorAll('.dev-socials a').forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                gsap.to(link, { color: '#4facfe', y: -5, duration: 0.3 });
+            });
+            link.addEventListener('mouseleave', () => {
+                gsap.to(link, { color: '#fff', y: 0, duration: 0.3 });
+            });
+        });
+    </script>
+</body>
+</html>

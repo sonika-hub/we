@@ -1,0 +1,121 @@
+<html lang="en">
+<head>
+    <%- include("partials/header") %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body style="background: #050505; color: #fff; display: flex; flex-direction: column; min-height: 100vh; margin: 0; overflow-x: hidden;">
+    <%- include("partials/navbar") %>
+
+    <main style="flex: 1;">
+        <section class="series-hero" style="height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 10%; background: radial-gradient(circle at top right, #0a192f, #050505);">
+            <div class="glass-card" style="padding: 60px; background: rgba(255,255,255,0.02); backdrop-filter: blur(25px); border: 1px solid rgba(255,255,255,0.08); border-radius: 40px; max-width: 900px; position: relative;">
+                
+                <span style="letter-spacing: 5px; color: #00f2fe; text-transform: uppercase; font-size: 0.8rem; font-weight: bold;">completed • 2025</span>
+                
+                <h1 style="font-family: 'Syne'; font-size: clamp(3rem, 8vw, 5.5rem); text-transform: uppercase; margin: 20px 0; line-height: 0.9;">
+                    Thamepo<br>
+                    <span style="font-size: 0.4em; letter-spacing: 10px; opacity: 0.8; font-weight: 300;">Heart That Skips a Beat</span>
+                </h1>
+
+                <p style="margin: 0 auto 40px; font-size: 1.1rem; line-height: 1.8; opacity: 0.6; max-width: 650px;">
+When Po is tasked with documenting boy group Mars's final concert before their disbandment, he inadvertently becomes the closest confidant of leader Thame. Despite his wishes, Thame's about to make his debut in South Korea, leaving the rest of the group—Dylan, Jun, Nano and Pepper—behind, rife with misunderstanding.                </p>
+                
+                <div class="preview-container" style="display: flex; gap: 20px; justify-content: center; align-items: flex-end; height: 200px; margin-top: 20px;">
+                    <div class="p-card" style="width: 90px; height: 130px; border-radius: 12px; transform: rotate(-8deg); overflow: hidden; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                        <img src="/images/thamepothumb1.jpg" style="width:100%; height:100%; object-fit:cover; filter: brightness(0.8);">
+                    </div>
+                    <div class="p-card" style="width: 110px; height: 160px; border-radius: 12px; z-index: 2; overflow: hidden; border: 2px solid #00f2fe; box-shadow: 0 0 40px rgba(0, 242, 254, 0.2);">
+                        <img src="/images/thamepomain.jpg" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                    <div class="p-card" style="width: 90px; height: 130px; border-radius: 12px; transform: rotate(8deg); overflow: hidden; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                        <img src="/images/thamepothumb2.jpg" style="width:100%; height:100%; object-fit:cover; filter: brightness(0.8);">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="photo-dump" style="padding: 120px 8%; background: #050505;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px;">
+                <div>
+                    <h2 style="font-family: 'Syne'; font-size: 3rem; margin: 0; text-transform: uppercase;">The Visual Archive</h2>
+                    <p style="opacity: 0.5; letter-spacing: 2px;">BEHIND THE SCENES & STILLS</p>
+                </div>
+                <div style="height: 2px; flex: 1; background: linear-gradient(to right, #00f2fe, transparent); margin: 0 40px 15px;"></div>
+            </div>
+            
+            <div class="bento-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 280px; gap: 25px;">
+                <div class="grid-item" style="grid-column: span 2; grid-row: span 2;">
+                    <img src="/images/thamepo1.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:24px;">
+                </div>
+                <div class="grid-item" style="grid-row: span 2;">
+                    <img src="/images/thamepo2.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:24px;">
+                </div>
+                <div class="grid-item">
+                    <img src="/images/thamepo3.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:24px;">
+                </div>
+                <div class="grid-item">
+                    <img src="/images/thamepo4.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:24px;">
+                </div>
+                <div class="grid-item" style="grid-column: span 3;">
+                    <img src="/images/thamepo5.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:24px;">
+                </div>
+                <div class="grid-item">
+                    <img src="/images/thamepo6.jpg" style="width:100%; height:100%; object-fit:cover; border-radius:24px;">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <%- include("partials/footer") %>
+
+    <style>
+        .grid-item {
+            cursor: pointer;
+            overflow: hidden;
+            background: #111;
+            border-radius: 24px;
+        }
+        .grid-item img {
+            transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1), filter 0.5s ease;
+        }
+        .grid-item:hover img {
+            transform: scale(1.08);
+            filter: brightness(1.1);
+        }
+    </style>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Staggered reveal for grid
+        gsap.from(".grid-item", {
+            scrollTrigger: {
+                trigger: ".bento-grid",
+                start: "top 75%",
+            },
+            y: 60,
+            opacity: 0,
+            stagger: 0.15,
+            duration: 1,
+            ease: "power3.out"
+        });
+
+        // Hover Effect for Glass Card
+        const glass = document.querySelector('.glass-card');
+        const cards = document.querySelectorAll('.p-card');
+        
+        glass.addEventListener('mouseenter', () => {
+            gsap.to(cards[0], { x: -40, rotate: -20, duration: 0.7, ease: "power2.out" });
+            gsap.to(cards[2], { x: 40, rotate: 20, duration: 0.7, ease: "power2.out" });
+            gsap.to(cards[1], { y: -10, scale: 1.05, duration: 0.7, ease: "power2.out" });
+        });
+
+        glass.addEventListener('mouseleave', () => {
+            gsap.to(cards[0], { x: 0, rotate: -8, duration: 0.7 });
+            gsap.to(cards[2], { x: 0, rotate: 8, duration: 0.7 });
+            gsap.to(cards[1], { y: 0, scale: 1, duration: 0.7 });
+        });
+    </script>
+</body>
+</html>

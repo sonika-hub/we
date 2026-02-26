@@ -1,0 +1,66 @@
+<html lang="en">
+<head>
+    <%- include("partials/header") %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body style="background: #0a0a0a; color: #fff; display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden;">
+    <%- include("partials/navbar") %>
+
+    <main style="flex: 1; display: flex; padding-top: 80px;">
+        <div class="artist-detail-container" style="display: flex; width: 100%;">
+            <div class="side-title" style="writing-mode: vertical-rl; transform: rotate(180deg); padding: 40px; border-right: 1px solid #333;">
+                <h1 style="font-family: 'Syne'; font-size: 8vw; margin: 0; color: #1a1a1a;">WILLIAM JAKRAPATR</h1>
+            </div>
+
+            <div class="main-content" style="padding: 60px 100px; flex: 1;">
+                <div class="image-frame" style="position: relative; width: 100%; max-width: 600px; margin-bottom: 50px;">
+                    <img src="/images/artist1.jpg" style="width: 100%; filter: sepia(0.2) brightness(0.9); border-radius: 4px;">
+                    <div style="position: absolute; top: -20px; left: -20px; width: 100%; height: 100%; border: 1px solid var(--accent); z-index: -1;"></div>
+                </div>
+                
+                <h2 style="font-family: 'Syne'; font-size: 3rem; color: var(--accent);">The "lungs" of new gen T-pop</h2>
+                <p style="font-size: 1.1rem; line-height: 1.8; max-width: 650px; opacity: 0.8; margin-bottom: 40px;">
+William Jakrapatr Kaewpanpong is a Thai-American singer, actor, guitarist, pianist — and the main powerhouse vocalist of LYKN under GMMTV. Most people first noticed him in ThamePo: Heart That Skips a Beat, where he completely blew up with his emotional acting, insane live vocals, and effortless chemistry with Est Supha Sangaworawong.
+
+He came into the spotlight through Project Alpha (2023), debuted with LYKN in 2024, and fans instantly crowned him the “Lungs of T-Pop” because his voice hits hard. His OSTs like 5CM, Good Time, and Love Echo went viral across platforms.
+
+Outside of music and acting, William is huge online — millions of followers, nonstop trending tags, viral TikToks, and fanmeets that sell out from Bangkok to Tokyo under the WilliamEst name.
+
+And on top of all that?
+At just 20 years old, he became the CEO of his own clothing brand Zaven, proving he’s not just talented — he’s business-smart and building his own lane.
+
+Overall, he’s one of those rare multi-talented artists who’s rising fast in T-Pop, BL dramas, and basically everywhere online.                </p>
+
+                <div class="social-links" style="display: flex; gap: 30px; align-items: center; margin-bottom: 60px;">
+                    <a href="https://www.instagram.com/williamjkp/" target="_blank" class="social-icon" style="color: #fff; text-decoration: none; font-size: 1.5rem; transition: 0.3s;">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://x.com/Williamjkp1" target="_blank" class="social-icon" style="color: #fff; text-decoration: none; font-size: 1.5rem; transition: 0.3s;">
+                        <i class="fab fa-x-twitter"></i>
+                    </a>
+                    <a href="https://www.tiktok.com/@william_jkp1" target="_blank" class="social-icon" style="color: #fff; text-decoration: none; font-size: 1.5rem; transition: 0.3s;">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <div style="height: 1px; width: 50px; background: rgba(255,255,255,0.2);"></div>
+                    <span style="font-family: 'Syne'; font-size: 0.8rem; letter-spacing: 3px; opacity: 0.5;">FOLLOW</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <%- include("partials/footer") %>
+
+    <script>
+        gsap.from(".image-frame", { duration: 2, x: -50, opacity: 0, ease: "power4.out" });
+        gsap.from(".side-title h1", { duration: 1.5, y: 100, opacity: 0, delay: 0.5 });
+        gsap.from(".social-links", { duration: 1, y: 20, opacity: 0, delay: 1 });
+
+        // Hover animations
+        document.querySelectorAll('.social-icon').forEach(icon => {
+            icon.addEventListener('mouseenter', () => gsap.to(icon, { color: '#00f2fe', scale: 1.2, duration: 0.3 }));
+            icon.addEventListener('mouseleave', () => gsap.to(icon, { color: '#fff', scale: 1, duration: 0.3 }));
+        });
+    </script>
+</body>
+</html>

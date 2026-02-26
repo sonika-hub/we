@@ -1,0 +1,72 @@
+<html lang="en">
+<head>
+    <%- include("partials/header") %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body class="series-page" style="display: flex; flex-direction: column; min-height: 100vh; background: #0a0a0a;">
+<%- include("partials/navbar") %>
+
+<main style="flex: 1;">
+    <div class="series-wrapper">
+        
+        <section class="series-item" data-color="#1a1a2e" style="padding: 120px 10%; min-height: 90vh; display: flex; align-items: center; gap: 60px;">
+            <div class="series-image-wrapper" style="flex: 1;">
+                <img src="/images/series1_poster.jpg" alt="Series 1" class="series-img" style="width: 100%; border-radius: 10px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+            </div>
+            <div class="series-info" style="flex: 1;">
+                <span class="series-year">2025</span>
+                <h2 class="series-title" style="font-family: 'Syne'; font-size: 3.5rem; line-height: 1.1;">THAMEPO<br>HEART THAT SKIPS A BEAT<br><span style="color: var(--accent);">as thamepo</span></h2>
+                <a href="/series/1" class="btn-explore" style="display: inline-block; padding: 15px 40px; border: 1px solid #fff; color: #fff; text-decoration: none; border-radius: 50px; font-family: 'Syne'; transition: 0.3s;">more</a>
+            </div>
+        </section>
+
+        <section class="series-item" data-color="#1a1a2e" style="padding: 120px 10%; min-height: 90vh; display: flex; flex-direction: row-reverse; align-items: center; gap: 60px;">
+            <div class="series-image-wrapper" style="flex: 1;">
+                <img src="/images/series2_poster.jpg" alt="Series 2" class="series-img" style="width: 100%; border-radius: 10px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+            </div>
+            <div class="series-info" style="flex: 1;">
+                <span class="series-year">2025</span>
+                <h2 class="series-title" style="font-family: 'Syne'; font-size: 3.5rem; line-height: 1.1;">ME AND THEE<br><span style="color: var(--accent);">as romemok</span></h2>
+                <a href="/series/2" class="btn-explore" style="display: inline-block; padding: 15px 40px; border: 1px solid #fff; color: #fff; text-decoration: none; border-radius: 50px; font-family: 'Syne'; transition: 0.3s;">more</a>
+            </div>
+        </section>
+
+        <section class="series-item" data-color="#1a1a2e" style="padding: 120px 10%; min-height: 90vh; display: flex; align-items: center; gap: 60px;">
+            <div class="series-image-wrapper" style="flex: 1;">
+                <img src="/images/series3_poster.jpg" alt="Series 3" class="series-img" style="width: 100%; border-radius: 10px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+            </div>
+            <div class="series-info" style="flex: 1;">
+                <span class="series-year">2026</span>
+                <h2 class="series-title" style="font-family: 'Syne'; font-size: 3.5rem; line-height: 1.1;">YOU MANIAC<br><span style="color: var(--accent);">as deanmoth</span></h2>
+                <a href="/series/3" class="btn-explore" style="display: inline-block; padding: 15px 40px; border: 1px solid #fff; color: #fff; text-decoration: none; border-radius: 50px; font-family: 'Syne'; transition: 0.3s;">more</a>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<%- include("partials/footer") %>
+
+<script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Color shifting background
+    gsap.utils.toArray(".series-item").forEach((panel) => {
+        ScrollTrigger.create({
+            trigger: panel,
+            start: "top center",
+            end: "bottom center",
+            onEnter: () => gsap.to("body", { backgroundColor: panel.dataset.color, duration: 0.8 }),
+            onEnterBack: () => gsap.to("body", { backgroundColor: panel.dataset.color, duration: 0.8 })
+        });
+    });
+
+    // Clean Hover Effects
+    document.querySelectorAll('.btn-explore').forEach(btn => {
+        btn.addEventListener('mouseenter', () => gsap.to(btn, { backgroundColor: '#fff', color: '#000', scale: 1.05 }));
+        btn.addEventListener('mouseleave', () => gsap.to(btn, { backgroundColor: 'transparent', color: '#fff', scale: 1 }));
+    });
+</script>
+</body>
+</html>

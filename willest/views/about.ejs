@@ -3,6 +3,37 @@
     <%- include("partials/header") %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <style>
+        /* --- MOBILE RESPONSIVE FIXES --- */
+        @media (max-width: 768px) {
+            main {
+                padding: 40px 15px !important; /* Reduce outer spacing */
+            }
+
+            .glass-card {
+                padding: 40px 20px !important; /* Narrower padding inside the card */
+                border-radius: 20px !important; /* Slightly sharper corners for mobile */
+            }
+
+            h2 {
+                font-size: 1.8rem !important; /* Smaller heading */
+            }
+
+            .about-text {
+                font-size: 0.95rem !important; /* Better readability on phones */
+                margin-bottom: 30px !important;
+            }
+
+            .dev-socials {
+                gap: 30px !important; /* Closer icons for thumb-reach */
+            }
+            
+            .dev-socials a {
+                font-size: 1.5rem !important;
+            }
+        }
+    </style>
 </head>
 <body style="background: #050505; color: #fff; display: flex; flex-direction: column; min-height: 100vh; margin: 0;">
     <%- include("partials/navbar") %>
@@ -29,7 +60,7 @@
                 </p>
 
                 <div class="dev-socials" style="display: flex; gap: 40px; justify-content: center;">
-                    <a href="hhttps://www.instagram.com/_sonika_p_/" target="_blank" style="color: #fff; font-size: 1.8rem; text-decoration: none; transition: 0.3s;">
+                    <a href="https://www.instagram.com/_sonika_p_/" target="_blank" style="color: #fff; font-size: 1.8rem; text-decoration: none; transition: 0.3s;">
                         <i class="fab fa-instagram"></i>
                     </a>
                     <a href="https://x.com/Willyfan98" target="_blank" style="color: #fff; font-size: 1.8rem; text-decoration: none; transition: 0.3s;">
@@ -52,7 +83,7 @@
             ease: "expo.out"
         });
 
-        // Hover animations for the icons
+        // Hover animations for the icons (optimized for touch devices)
         document.querySelectorAll('.dev-socials a').forEach(link => {
             link.addEventListener('mouseenter', () => {
                 gsap.to(link, { color: '#4facfe', y: -5, duration: 0.3 });

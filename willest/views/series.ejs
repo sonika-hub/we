@@ -3,42 +3,84 @@
     <%- include("partials/header") %>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <style>
+        /* --- MOBILE RESPONSIVE FIXES --- */
+        @media (max-width: 768px) {
+            .series-item {
+                flex-direction: column !important; /* Stack vertically */
+                padding: 80px 5% !important;
+                gap: 30px !important;
+                text-align: center;
+                min-height: auto !important;
+            }
+
+            .series-image-wrapper {
+                width: 100%;
+                max-width: 400px; /* Prevent posters from getting too huge */
+                margin: 0 auto;
+            }
+
+            .series-title {
+                font-size: 2.2rem !important; /* Scale down large text */
+                margin-top: 15px;
+            }
+
+            .series-year {
+                font-size: 0.9rem;
+                letter-spacing: 3px;
+            }
+
+            .btn-explore {
+                width: 100%; /* Full width buttons are easier to tap on mobile */
+                box-sizing: border-box;
+            }
+        }
+
+        /* Smooth reveal for images */
+        .series-img {
+            transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+        .series-item:hover .series-img {
+            transform: scale(1.02);
+        }
+    </style>
 </head>
-<body class="series-page" style="display: flex; flex-direction: column; min-height: 100vh; background: #0a0a0a;">
+<body class="series-page" style="display: flex; flex-direction: column; min-height: 100vh; background: #0a0a0a; transition: background-color 0.8s ease;">
 <%- include("partials/navbar") %>
 
 <main style="flex: 1;">
     <div class="series-wrapper">
         
-        <section class="series-item" data-color="#1a1a2e" style="padding: 120px 10%; min-height: 90vh; display: flex; align-items: center; gap: 60px;">
+        <section class="series-item" data-color="#0a192f" style="padding: 120px 10%; min-height: 90vh; display: flex; align-items: center; gap: 60px;">
             <div class="series-image-wrapper" style="flex: 1;">
                 <img src="/images/series1_poster.jpg" alt="Series 1" class="series-img" style="width: 100%; border-radius: 10px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
             </div>
             <div class="series-info" style="flex: 1;">
-                <span class="series-year">2025</span>
-                <h2 class="series-title" style="font-family: 'Syne'; font-size: 3.5rem; line-height: 1.1;">THAMEPO<br>HEART THAT SKIPS A BEAT<br><span style="color: var(--accent);">as thamepo</span></h2>
+                <span class="series-year" style="letter-spacing: 5px; opacity: 0.5;">2025</span>
+                <h2 class="series-title" style="font-family: 'Syne'; font-size: 3.5rem; line-height: 1.1; margin: 15px 0;">THAMEPO<br><span style="font-size: 0.4em; opacity: 0.7;">HEART THAT SKIPS A BEAT</span><br><span style="color: var(--accent); font-size: 0.5em; letter-spacing: 2px;">as thamepo</span></h2>
                 <a href="/series/1" class="btn-explore" style="display: inline-block; padding: 15px 40px; border: 1px solid #fff; color: #fff; text-decoration: none; border-radius: 50px; font-family: 'Syne'; transition: 0.3s;">more</a>
             </div>
         </section>
 
-        <section class="series-item" data-color="#1a1a2e" style="padding: 120px 10%; min-height: 90vh; display: flex; flex-direction: row-reverse; align-items: center; gap: 60px;">
+        <section class="series-item" data-color="#2a1b0a" style="padding: 120px 10%; min-height: 90vh; display: flex; flex-direction: row-reverse; align-items: center; gap: 60px;">
             <div class="series-image-wrapper" style="flex: 1;">
                 <img src="/images/series2_poster.jpg" alt="Series 2" class="series-img" style="width: 100%; border-radius: 10px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
             </div>
             <div class="series-info" style="flex: 1;">
-                <span class="series-year">2025</span>
-                <h2 class="series-title" style="font-family: 'Syne'; font-size: 3.5rem; line-height: 1.1;">ME AND THEE<br><span style="color: var(--accent);">as romemok</span></h2>
+                <span class="series-year" style="letter-spacing: 5px; opacity: 0.5;">2025</span>
+                <h2 class="series-title" style="font-family: 'Syne'; font-size: 3.5rem; line-height: 1.1; margin: 15px 0;">ME AND THEE<br><span style="color: var(--accent); font-size: 0.5em; letter-spacing: 2px;">as romemok</span></h2>
                 <a href="/series/2" class="btn-explore" style="display: inline-block; padding: 15px 40px; border: 1px solid #fff; color: #fff; text-decoration: none; border-radius: 50px; font-family: 'Syne'; transition: 0.3s;">more</a>
             </div>
         </section>
 
-        <section class="series-item" data-color="#1a1a2e" style="padding: 120px 10%; min-height: 90vh; display: flex; align-items: center; gap: 60px;">
+        <section class="series-item" data-color="#2e0a0a" style="padding: 120px 10%; min-height: 90vh; display: flex; align-items: center; gap: 60px;">
             <div class="series-image-wrapper" style="flex: 1;">
                 <img src="/images/series3_poster.jpg" alt="Series 3" class="series-img" style="width: 100%; border-radius: 10px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
             </div>
             <div class="series-info" style="flex: 1;">
-                <span class="series-year">2026</span>
-                <h2 class="series-title" style="font-family: 'Syne'; font-size: 3.5rem; line-height: 1.1;">YOU MANIAC<br><span style="color: var(--accent);">as deanmoth</span></h2>
+                <span class="series-year" style="letter-spacing: 5px; opacity: 0.5;">2026</span>
+                <h2 class="series-title" style="font-family: 'Syne'; font-size: 3.5rem; line-height: 1.1; margin: 15px 0;">YOU MANIAC<br><span style="color: var(--accent); font-size: 0.5em; letter-spacing: 2px;">as deanmoth</span></h2>
                 <a href="/series/3" class="btn-explore" style="display: inline-block; padding: 15px 40px; border: 1px solid #fff; color: #fff; text-decoration: none; border-radius: 50px; font-family: 'Syne'; transition: 0.3s;">more</a>
             </div>
         </section>
@@ -51,7 +93,7 @@
 <script>
     gsap.registerPlugin(ScrollTrigger);
 
-    // Color shifting background
+    // Color shifting background - updated to use specific colors for each series
     gsap.utils.toArray(".series-item").forEach((panel) => {
         ScrollTrigger.create({
             trigger: panel,
@@ -66,6 +108,19 @@
     document.querySelectorAll('.btn-explore').forEach(btn => {
         btn.addEventListener('mouseenter', () => gsap.to(btn, { backgroundColor: '#fff', color: '#000', scale: 1.05 }));
         btn.addEventListener('mouseleave', () => gsap.to(btn, { backgroundColor: 'transparent', color: '#fff', scale: 1 }));
+    });
+
+    // Reveal animation for mobile/desktop
+    gsap.from(".series-img", {
+        scrollTrigger: {
+            trigger: ".series-wrapper",
+            start: "top 80%"
+        },
+        y: 50,
+        opacity: 0,
+        stagger: 0.2,
+        duration: 1,
+        ease: "power3.out"
     });
 </script>
 </body>

@@ -7,28 +7,31 @@
 <body style="background: #0a0a0a; color: #fff; display: flex; flex-direction: column; min-height: 100vh; margin: 0; overflow-x: hidden;">
     <%- include("partials/navbar") %>
 
-    <main style="flex: 1; display: flex; flex-direction: column; padding-top: 100px;">
-        <div class="artist-detail-container" style="display: flex; width: 100%; flex: 1;">
+    <main class="container-fluid p-0" style="flex: 1; padding-top: 100px;">
+        <div class="row g-0 artist-detail-container" style="min-height: 100vh;">
             
-            <div class="side-title" style="writing-mode: vertical-rl; transform: rotate(180deg); padding: 40px; border-right: 1px solid #333;">
-                <h1 style="font-family: 'Syne'; font-size: 8vw; margin: 0; color: #1a1a1a;">EST SUPHA</h1>
+            <div class="col-lg-1 d-none d-lg-flex side-title" style="writing-mode: vertical-rl; transform: rotate(180deg); padding: 40px; border-right: 1px solid #333; justify-content: center;">
+                <h1 style="font-family: 'Syne'; font-size: 8vw; margin: 0; color: #1a1a1a; white-space: nowrap;">EST SUPHA</h1>
             </div>
 
-            <div class="main-content" style="padding: 0 100px 100px 100px; flex: 1;">
+            <div class="col-12 col-lg-11 main-content" style="padding: 20px 5% 100px 5%;">
+                
                 <div class="image-frame" style="position: relative; width: 100%; max-width: 600px; margin-bottom: 50px;">
-                    <img src="/images/artist2.jpg" style="width: 100%; filter: sepia(0.2) brightness(0.9); border-radius: 4px;">
-                    <div style="position: absolute; top: -20px; left: -20px; width: 100%; height: 100%; border: 1px solid var(--accent); z-index: -1;"></div>
+                    <img src="/images/artist2.jpg" class="img-fluid" style="width: 100%; filter: sepia(0.2) brightness(0.9); border-radius: 4px;">
+                    <div style="position: absolute; top: -15px; left: -15px; width: 100%; height: 100%; border: 1px solid var(--accent); z-index: -1;"></div>
                 </div>
                 
-                <h2 style="font-family: 'Syne'; font-size: 3rem; color: var(--accent);">The Waterline Icon</h2>
-                <p style="font-size: 1.1rem; line-height: 1.8; max-width: 650px; opacity: 0.8; margin-bottom: 40px;">
+                <h2 class="display-4" style="font-family: 'Syne'; color: var(--accent); font-weight: bold;">The Waterline Icon</h2>
+                
+                <p style="font-size: 1.1rem; line-height: 1.8; max-width: 750px; opacity: 0.8; margin-bottom: 40px;">
                     Est Supha Sangaworawong is a Thai actor and former national swimmer who went from breaking records in the pool to breaking hearts on-screen. Born in Bangkok in 2001, he’s signed under GMMTV and is best known for playing Po in ThamePo: Heart That Skips a Beat and Tew in High School Frenemy. Before acting, he was a legit elite athlete — a SEA Games medalist and part of Thailand’s record-setting relay teams.
+                    <br><br>
+                    Est switched lanes from sports to entertainment and ended up becoming one of GMMTV’s fastest-rising BL actors, especially after teaming up with William Jakrapatr Kaewpanpong, where their chemistry basically took over the internet.
+                    <br><br>
+                    Outside acting, Est is surprisingly business-savvy. He’s the CEO of Middle Riddle, a clothing brand known for clean, modern designs, and recently opened Haus The Bloom, a flower shop that reflects his softer, aesthetic side. Between acting projects, music collabs, travel content, and his businesses, he’s built a massive digital following and a reputation as one of the most versatile new stars in Thai pop culture.
+                </p>
 
-Est switched lanes from sports to entertainment and ended up becoming one of GMMTV’s fastest-rising BL actors, especially after teaming up with William Jakrapatr Kaewpanpong, where their chemistry basically took over the internet.
-
-Outside acting, Est is surprisingly business-savvy. He’s the CEO of Middle Riddle, a clothing brand known for clean, modern designs, and recently opened Haus The Bloom, a flower shop that reflects his softer, aesthetic side. Between acting projects, music collabs, travel content, and his businesses, he’s built a massive digital following and a reputation as one of the most versatile new stars in Thai pop culture.
-
-                <div class="social-links" style="display: flex; gap: 30px; align-items: center;">
+                <div class="social-links" style="display: flex; gap: 30px; align-items: center; flex-wrap: wrap;">
                     <a href="https://www.instagram.com/est_rvp/" target="_blank" class="social-icon" style="color: #fff; text-decoration: none; font-size: 1.5rem; transition: 0.3s;">
                         <i class="fab fa-instagram"></i>
                     </a>
@@ -38,7 +41,7 @@ Outside acting, Est is surprisingly business-savvy. He’s the CEO of Middle Rid
                     <a href="https://www.tiktok.com/@est_rvp" target="_blank" class="social-icon" style="color: #fff; text-decoration: none; font-size: 1.5rem; transition: 0.3s;">
                         <i class="fab fa-tiktok"></i>
                     </a>
-                    <div style="height: 1px; width: 50px; background: rgba(255,255,255,0.2);"></div>
+                    <div class="d-none d-sm-block" style="height: 1px; width: 50px; background: rgba(255,255,255,0.2);"></div>
                     <span style="font-family: 'Syne'; font-size: 0.8rem; letter-spacing: 3px; opacity: 0.5;">FOLLOW</span>
                 </div>
             </div>
@@ -52,7 +55,6 @@ Outside acting, Est is surprisingly business-savvy. He’s the CEO of Middle Rid
         gsap.from(".side-title h1", { duration: 1.2, y: 100, opacity: 0, delay: 0.3 });
         gsap.from(".social-links", { duration: 1, y: 20, opacity: 0, delay: 0.8 });
 
-        // Hover animations
         document.querySelectorAll('.social-icon').forEach(icon => {
             icon.addEventListener('mouseenter', () => gsap.to(icon, { color: '#00f2fe', scale: 1.2, duration: 0.3 }));
             icon.addEventListener('mouseleave', () => gsap.to(icon, { color: '#fff', scale: 1, duration: 0.3 }));

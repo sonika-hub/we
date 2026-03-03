@@ -3,6 +3,57 @@
     <%- include("partials/header") %>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        /* --- MOBILE RESPONSIVE FIXES --- */
+        @media (max-width: 768px) {
+            .gallery-hero {
+                padding: 80px 5% 20px !important;
+            }
+
+            /* Force the grid into a single column on mobile */
+            .photo-dump-grid {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 15px !important;
+            }
+
+            /* Reset all spanning classes so images take full width */
+            .dump-item.large, 
+            .dump-item.tall, 
+            .dump-item.wide,
+            .dump-item {
+                grid-column: span 1 !important;
+                grid-row: span 1 !important;
+                height: 350px !important; /* Fixed height for consistent mobile scrolling */
+                width: 100% !important;
+            }
+
+            h1 {
+                letter-spacing: 8px !important;
+                font-size: 2.5rem !important;
+            }
+        }
+
+        /* Essential styles to ensure images look good in the grid */
+        .dump-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            background: #111;
+        }
+
+        .dump-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .dump-item:hover img {
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body class="gallery-page">
 <%- include("partials/navbar") %>
@@ -28,19 +79,21 @@
 <%- include("partials/footer") %>
 
 <script>
+    gsap.registerPlugin(ScrollTrigger);
+
     // Subtle reveal animation as you scroll
-    gsap.utils.toArray(".dump-item").forEach((item) => {
-        gsap.from(item, {
-            scrollTrigger: {
-                trigger: item,
-                start: "top 90%",
-                toggleActions: "play none none reverse"
-            },
-            y: 30,
-            opacity: 0,
-            duration: 1,
-            ease: "power2.out"
-        });
+    // Staggered reveal works better for grids
+    gsap.from(".dump-item", {
+        scrollTrigger: {
+            trigger: ".photo-dump-grid",
+            start: "top 85%",
+            toggleActions: "play none none reverse"
+        },
+        y: 40,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.1, // Images will pop in one after another
+        ease: "power2.out"
     });
 </script>
 </body>

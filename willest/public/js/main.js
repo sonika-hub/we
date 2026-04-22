@@ -1,101 +1,100 @@
-document.addEventListener("DOMContentLoaded", () => {
-    
-    // 1. HAMBURGER LOGIC (Always runs)
-    const menuToggle = document.getElementById('mobile-menu');
-    const navLinks = document.querySelector('.nav-links');
+/**
+ * WILLIAMEST - Expert Front-End Logic
+ * Targets: Responsive Nav, Scroll Animations, Gallery Music
+ */
 
-    if (menuToggle && navLinks) {
-        menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('active');
-            navLinks.classList.toggle('active');
-            // Toggle body scroll to prevent scrolling when menu is open
-            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
-        });
-    }
-
-    // 2. ANIMATIONS (Only runs if the element is found on the page)
-    const heroTitle = document.querySelector(".hero .title");
-    if (heroTitle) {
-        gsap.from(heroTitle, { duration: 1.5, y: 50, opacity: 0, ease: "expo.out" });
-    }
-
-    const cards = document.querySelectorAll(".glass-card, .artist-card");
-    if (cards.length > 0) {
-        gsap.from(cards, {
-            scrollTrigger: ".glass-card",
-            duration: 1,
-            y: 100,
-            opacity: 0,
-            stagger: 0.2,
-            ease: "power4.out"
-        });
-    }
-
-    // 3. MOUSE BLOB (Always runs, background only)
-    if (!document.getElementById("mouse-blob")) {
-        const blob = document.createElement("div");
-        blob.id = "mouse-blob";
-        blob.style.cssText = "position:fixed; top:0; left:0; width:400px; height:400px; background:radial-gradient(circle, rgba(112,0,255,0.06) 0%, transparent 70%); pointer-events:none; z-index:-1;";
-        document.body.appendChild(blob);
-
-        window.addEventListener("mousemove", (e) => {
-            gsap.to(blob, {
-                x: e.clientX - 200,
-                y: e.clientY - 200,
-                duration: 1.5,
-                ease: "power2.out"
-            });
-        });
-    }
-});
-// Wrap in an IIFE to avoid conflicts with other scripts
 (function() {
-    const initNav = () => {
+    "use strict";
+
+    const init = () => {
         const menuToggle = document.getElementById('mobile-menu');
         const navLinks = document.querySelector('.nav-links');
 
-        // Check if elements exist
-        if (!menuToggle || !navLinks) {
-            console.warn("Navbar elements not found. Check your IDs.");
-            return;
+        // --- 1. ROBUST MOBILE NAV ---
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                const isOpen = navLinks.classList.toggle('enhanced-open');
+                menuToggle.classList.toggle('active'); // Animates your hamburger bars
+                document.body.style.overflow = isOpen ? 'hidden' : '';
+            });
+
+            // Close menu on link click
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.onclick = () => {
+                    navLinks.classList.remove('enhanced-open');
+                    menuToggle.classList.remove('active');
+                    document.body.style.overflow = '';
+                };
+            });
         }
 
-        // Remove old listeners to prevent duplicates
-        menuToggle.onclick = null;
+        // --- 2. SCROLL REVEAL (Fixes "Missing Effects") ---
+        const revealTargets = document.querySelectorAll('.series-img, .glass-card, .artist-card, .dump-item, .series-item');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    // Optional: Trigger GSAP if script is loaded
+                    if (window.gsap) {
+                        gsap.to(entry.target, { opacity: 1, y: 0, duration: 1, ease: "power2.out" });
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
 
-        menuToggle.onclick = function(e) {
-            e.preventDefault();
-            this.classList.toggle('active');
-            navLinks.classList.toggle('active');
-            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
-        };
+        revealTargets.forEach(target => {
+            target.classList.add('enhanced-fade-element');
+            revealObserver.observe(target);
+        });
+
+        // --- 3. GALLERY MUSIC SYSTEM ---
+        const galleryGrid = document.querySelector('.photo-dump-grid') || document.querySelector('.gallery-section');
+        
+        if (galleryGrid) {
+            const bgMusic = new Audio('/audio/gallery-theme.mp3'); 
+            bgMusic.loop = true;
+            let musicUnlocked = false;
+
+            const musicBtn = document.createElement('button');
+            musicBtn.className = 'enhanced-music-btn';
+            musicBtn.innerHTML = '<i class="fas fa-music"></i>';
+            document.body.appendChild(musicBtn);
+
+            // Play/Pause when entering/leaving gallery
+            const musicObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && musicUnlocked) {
+                        bgMusic.play().catch(() => {});
+                    } else {
+                        bgMusic.pause();
+                    }
+                });
+            }, { threshold: 0.05 });
+
+            musicObserver.observe(galleryGrid);
+
+            // Click to enable/disable (Required to bypass browser autoplay blocks)
+            musicBtn.onclick = () => {
+                musicUnlocked = !musicUnlocked;
+                musicBtn.classList.toggle('playing', musicUnlocked);
+                
+                if (musicUnlocked) {
+                    bgMusic.play();
+                    musicBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+                } else {
+                    bgMusic.pause();
+                    musicBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+                }
+            };
+        }
     };
 
-    // Run on load
+    // Ensure DOM is ready and handle route changes
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initNav);
+        document.addEventListener('DOMContentLoaded', init);
     } else {
-        initNav();
+        init();
     }
 })();
-document.addEventListener("DOMContentLoaded", () => {
-    // 1. SELECT ELEMENTS
-    const menuToggle = document.getElementById('mobile-menu');
-    const navLinks = document.querySelector('.nav-links');
-
-    // 2. LOG TO CONSOLE (Check this in your browser F12)
-    console.log("Menu Toggle Found:", menuToggle);
-    console.log("Nav Links Found:", navLinks);
-
-    // 3. ATTACH CLICK
-    if (menuToggle && navLinks) {
-        menuToggle.onclick = function(e) {
-            console.log("Hamburger Clicked!"); // If this doesn't show in console, CSS is blocking the click
-            menuToggle.classList.toggle('active');
-            navLinks.classList.toggle('active');
-            
-            // Prevent background scrolling
-            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
-        };
-    }
-});

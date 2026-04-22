@@ -1,5 +1,104 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Artist Couple</title>
+<title>WILLIAMEST</title>
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/enhanced-mobile.css">
+
+<style>
+    @media (max-width: 768px) {
+        /* Navbar Responsive Logic */
+        #mobile-menu {
+            display: flex !important;
+        }
+
+        .nav-links {
+            display: none !important;
+            flex-direction: column !important;
+            position: fixed !important;
+            top: 70px !important; /* Height of mobile nav */
+            left: 0 !important;
+            width: 100% !important;
+            height: auto !important;
+            background: rgba(5, 5, 5, 0.98) !important;
+            backdrop-filter: blur(20px) !important;
+            padding: 40px 0 !important;
+            border-bottom: 1px solid var(--border) !important;
+            text-align: center !important;
+            gap: 25px !important;
+            z-index: 9999 !important;
+        }
+
+        .nav-links.active {
+            display: flex !important;
+        }
+
+        /* Layout & Scaling Fixes */
+        .split-showcase {
+            flex-direction: column !important;
+            height: auto !important;
+        }
+
+        .artist-panel {
+            height: 60vh !important;
+            width: 100% !important;
+            border-right: none !important;
+            border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+        }
+
+        .artist-name {
+            font-size: 3rem !important;
+        }
+
+        .series-item {
+            flex-direction: column !important;
+            padding: 80px 20px !important;
+            height: auto !important;
+            text-align: center !important;
+        }
+
+        .series-image-wrapper {
+            max-width: 100% !important;
+            height: 50vh !important;
+        }
+
+        .series-title {
+            font-size: 2.2rem !important;
+        }
+
+        .artist-detail-container {
+            flex-direction: column !important;
+        }
+
+        .side-title {
+            display: none !important;
+        }
+
+        .main-content {
+            padding: 40px 20px !important;
+            width: 100% !important;
+        }
+
+        .bento-grid {
+            grid-template-columns: 1fr !important;
+            grid-auto-rows: 250px !important;
+        }
+
+        .grid-item {
+            grid-column: span 1 !important;
+            grid-row: span 1 !important;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .artist-name { font-size: 2.5rem !important; }
+        .series-title { font-size: 1.8rem !important; }
+        .glass-card { padding: 30px 15px !important; }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .series-item { gap: 30px !important; padding: 120px 5% !important; }
+        .artist-name { font-size: 4rem !important; }
+    }
+</style>

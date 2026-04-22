@@ -1,0 +1,107 @@
+/* --- ENHANCED RESPONSIVE & ANIMATION LAYER --- */
+
+@media (max-width: 768px) {
+    /* 1. Force Navbar to be a Flex Container on Mobile */
+    nav.main-nav {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        height: 70px !important;
+        padding: 0 20px !important;
+        position: fixed !important;
+        top: 0;
+        width: 100%;
+        z-index: 10000;
+    }
+
+    /* Hide links by default, show as full-screen overlay when toggled */
+    nav.main-nav .nav-links {
+        display: none !important;
+    }
+
+    nav.main-nav .nav-links.enhanced-open {
+        display: flex !important;
+        flex-direction: column !important;
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        width: 100vw !important;
+        height: 100vh !important;
+        background: rgba(5, 5, 5, 0.98) !important; /* Matches --bg */
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 30px !important;
+        z-index: 9999 !important;
+    }
+
+    /* 2. Fix Series & Artist Page Layouts (Stacking) */
+    .series-item, 
+    .artist-detail-container, 
+    .split-showcase {
+        flex-direction: column !important;
+        display: flex !important;
+        height: auto !important;
+        padding: 80px 20px 40px !important;
+    }
+
+    .series-image-wrapper, 
+    .main-content,
+    .artist-panel {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: none !important;
+    }
+
+    .side-title {
+        display: none !important; /* Hide vertical text on mobile */
+    }
+
+    /* 3. Photo Dump Grid Repair */
+    .photo-dump-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important;
+    }
+
+    .dump-item {
+        width: 100% !important;
+        height: 300px !important;
+    }
+}
+
+/* 4. Universal Entrance Animations (Additive) */
+.enhanced-fade-element {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.enhanced-fade-element.is-visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* 5. Music Toggle Button UI */
+.enhanced-music-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--accent);
+    color: #fff;
+    cursor: pointer;
+    z-index: 10001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.enhanced-music-btn.playing {
+    box-shadow: 0 0 15px var(--accent);
+    background: rgba(0, 242, 254, 0.2);
+}

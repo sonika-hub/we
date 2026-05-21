@@ -371,6 +371,195 @@ img {
   gap: 14px;
 }
 
+/* ── Thumbnail button ──────────────────────────────── */
+.song-thumb-btn {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: none;
+  padding: 0;
+  background: #000;
+  cursor: pointer;
+  display: block;
+  flex-shrink: 0;
+}
+
+.song-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease, filter 0.5s ease;
+  filter: brightness(0.75);
+}
+
+.song-thumb-btn:hover .song-thumb-img {
+  transform: scale(1.04);
+  filter: brightness(0.55);
+}
+
+.song-thumb-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.song-play-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--song-accent, #00f2fe);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+
+.song-thumb-btn:hover .song-play-circle {
+  transform: scale(1.12);
+  box-shadow: 0 0 40px rgba(0,0,0,0.6);
+}
+
+/* ── Watch / YouTube buttons ───────────────────────── */
+.song-watch-btn,
+.song-yt-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border: none;
+}
+
+.song-watch-btn {
+  background: var(--song-accent, #00f2fe);
+  color: #000;
+}
+
+.song-watch-btn:hover {
+  filter: brightness(1.15);
+  transform: translateY(-1px);
+}
+
+.song-yt-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  text-decoration: none;
+}
+
+.song-yt-btn:hover {
+  border-color: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.06);
+}
+
+/* ── YouTube Modal ─────────────────────────────────── */
+.yt-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(12px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.yt-modal-box {
+  width: 100%;
+  max-width: 860px;
+  background: #0f0f0f;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+  animation: slideUp 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.yt-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.yt-modal-type {
+  font-size: 0.68rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.yt-modal-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.yt-modal-close {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.yt-modal-close:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.3);
+}
+
+.yt-embed-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.yt-iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
 /* ─── GALLERY GRID ───────────────────────────────────── */
 .photo-dump-grid {
   display: grid;

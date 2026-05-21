@@ -11,7 +11,7 @@ export default function Series() {
       const gsap = (window as any).gsap;
       gsap.registerPlugin((window as any).ScrollTrigger);
 
-      (window as any).gsap.utils.toArray(".series-item").forEach((panel: HTMLElement) => {
+      (window as any).gsap.utils.toArray(".series-item-row").forEach((panel: HTMLElement) => {
         (window as any).ScrollTrigger.create({
           trigger: panel,
           start: "top center",
@@ -28,7 +28,6 @@ export default function Series() {
     }
 
     return () => {
-      // Reset background on unmount
       document.body.style.backgroundColor = "";
     };
   }, []);
@@ -74,35 +73,36 @@ export default function Series() {
           {seriesList.map((s, i) => (
             <section
               key={i}
-              className="series-item"
+              className="series-item-row"
               data-color={s.color}
               style={{
-                padding: "120px 10%",
-                minHeight: "90vh",
+                padding: "clamp(60px, 10vw, 120px) clamp(16px, 8%, 10%)",
+                minHeight: "80vh",
                 display: "flex",
                 flexDirection: s.reverse ? "row-reverse" : "row",
                 alignItems: "center",
-                gap: "60px",
+                gap: "clamp(20px, 4vw, 60px)",
               }}
             >
-              <div className="series-image-wrapper" style={{ flex: 1 }}>
+              <div className="series-image-wrapper" style={{ flex: "0 1 45%", minWidth: 0 }}>
                 <img src={s.poster} alt={s.title} className="series-img"
-                  style={{ width: "100%", borderRadius: "10px", boxShadow: "0 20px 40px rgba(0,0,0,0.5)" }} />
+                  style={{ width: "100%", borderRadius: "10px", boxShadow: "0 20px 40px rgba(0,0,0,0.5)", display: "block" }} />
               </div>
-              <div style={{ flex: 1 }}>
-                <span className="series-year" style={{ letterSpacing: "5px", opacity: 0.5 }}>{s.year}</span>
-                <h2 className="series-title" style={{ fontFamily: "'Syne'", fontSize: "3.5rem", lineHeight: 1.1, margin: "15px 0" }}>
+              <div style={{ flex: "0 1 50%", minWidth: 0 }}>
+                <span style={{ letterSpacing: "5px", opacity: 0.5, fontSize: "clamp(0.7rem, 1.5vw, 0.9rem)" }}>{s.year}</span>
+                <h2 className="series-title-text" style={{ fontFamily: "'Syne'", fontSize: "clamp(2rem, 5vw, 3.5rem)", lineHeight: 1.1, margin: "12px 0" }}>
                   {s.title}<br />
                   {s.subtitle && <span style={{ fontSize: "0.4em", opacity: 0.7 }}>{s.subtitle}</span>}
                   {s.subtitle && <br />}
                   <span style={{ color: "var(--accent)", fontSize: "0.5em", letterSpacing: "2px" }}>{s.role}</span>
                 </h2>
                 <a href={s.link}
-                  className="btn-explore"
                   style={{
-                    display: "inline-block", padding: "15px 40px",
+                    display: "inline-block", padding: "12px 36px",
                     border: "1px solid #fff", color: "#fff",
-                    borderRadius: "50px", fontFamily: "'Syne'", transition: "0.3s"
+                    borderRadius: "50px", fontFamily: "'Syne'",
+                    fontSize: "clamp(0.75rem, 1.5vw, 0.9rem)",
+                    transition: "0.3s", marginTop: "8px"
                   }}
                   onClick={e => { e.preventDefault(); navigate(s.link); }}
                   onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#fff"; (e.currentTarget as HTMLElement).style.color = "#000"; }}

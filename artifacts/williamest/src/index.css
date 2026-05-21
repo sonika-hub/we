@@ -8,17 +8,22 @@
   --border: rgba(255, 255, 255, 0.1);
 }
 
-* {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
 }
 
 body {
   background-color: var(--bg);
   color: #fff;
   font-family: 'Outfit', sans-serif;
-  overflow-x: hidden;
   background: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #050505 100%);
 }
 
@@ -33,13 +38,18 @@ a {
   color: inherit;
 }
 
-/* Nav */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ─── NAVBAR ─────────────────────────────────────────── */
 .main-nav {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 80px;
+  height: 70px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -50,18 +60,19 @@ a {
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.home-page .main-nav {
-  background: transparent;
-  border-bottom: none;
-  backdrop-filter: none;
+.home-nav {
+  background: transparent !important;
+  border-bottom: none !important;
+  backdrop-filter: none !important;
 }
 
 .nav-logo a {
   font-family: 'Syne', sans-serif;
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 4vw, 1.5rem);
   font-weight: 800;
   color: #fff;
   letter-spacing: 2px;
+  white-space: nowrap;
 }
 
 .nav-logo span {
@@ -70,18 +81,19 @@ a {
 
 .nav-links {
   display: flex;
-  gap: 30px;
+  gap: clamp(16px, 3vw, 30px);
 }
 
 .nav-item {
   color: rgba(255, 255, 255, 0.6);
   font-family: 'Outfit', sans-serif;
-  font-size: 0.9rem;
+  font-size: clamp(0.75rem, 1.5vw, 0.9rem);
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: all 0.3s ease;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .nav-item:hover {
@@ -97,6 +109,8 @@ a {
   z-index: 10001;
   background: none;
   border: none;
+  padding: 4px;
+  flex-shrink: 0;
 }
 
 .bar {
@@ -111,7 +125,7 @@ a {
   background: var(--accent);
 }
 
-/* Footer */
+/* ─── FOOTER ─────────────────────────────────────────── */
 .footer {
   padding: 20px;
   text-align: center;
@@ -120,11 +134,11 @@ a {
   opacity: 0.5;
 }
 
-/* Split Artist Showcase */
+/* ─── ARTISTS SPLIT ──────────────────────────────────── */
 .split-showcase {
   display: flex;
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   overflow: hidden;
   background: #000;
 }
@@ -142,7 +156,7 @@ a {
 
 .panel-bg {
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
+  inset: 0;
   background-size: cover;
   background-position: center;
   filter: grayscale(100%) brightness(0.4);
@@ -172,7 +186,7 @@ a {
 
 .artist-name {
   font-family: 'Syne', sans-serif;
-  font-size: 5rem;
+  font-size: clamp(2.5rem, 8vw, 5rem);
   line-height: 0.9;
   text-transform: uppercase;
   margin: 0;
@@ -185,6 +199,7 @@ a {
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.5s ease;
+  font-size: clamp(0.75rem, 2vw, 0.95rem);
 }
 
 .artist-panel:hover .artist-bio {
@@ -209,13 +224,13 @@ a {
   color: #000;
 }
 
-/* Photo Grid */
+/* ─── GALLERY GRID ───────────────────────────────────── */
 .photo-dump-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   grid-auto-rows: 250px;
   grid-auto-flow: dense;
-  gap: 15px;
+  gap: 12px;
 }
 
 .dump-item {
@@ -251,21 +266,12 @@ a {
   grid-column: span 2;
 }
 
-/* Series */
-.series-page {
-  transition: background-color 0.8s ease;
-  background-color: #050505;
-}
-
+/* ─── SERIES ─────────────────────────────────────────── */
 .series-img {
   transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
 }
 
-.series-item:hover .series-img {
-  transform: scale(1.02);
-}
-
-/* Glass card */
+/* ─── GLASS CARD ─────────────────────────────────────── */
 .glass-card {
   background: var(--glass);
   backdrop-filter: blur(20px);
@@ -280,27 +286,26 @@ a {
   box-shadow: 0 0 30px rgba(0, 242, 254, 0.2);
 }
 
-/* Bento grid */
+/* ─── BENTO GRID ─────────────────────────────────────── */
 .bento-grid .grid-item {
   cursor: pointer;
   overflow: hidden;
   background: #111;
-  border-radius: 24px;
+  border-radius: 16px;
 }
 
 .bento-grid .grid-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1), filter 0.5s ease;
+  transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
 }
 
 .bento-grid .grid-item:hover img {
-  transform: scale(1.08);
-  filter: brightness(1.1);
+  transform: scale(1.07);
 }
 
-/* Cast card */
+/* ─── CAST CARD ──────────────────────────────────────── */
 .cast-card img {
   transition: 0.8s cubic-bezier(0.2, 1, 0.3, 1);
 }
@@ -310,8 +315,59 @@ a {
   transform: scale(1.05);
 }
 
-/* Mobile nav */
+/* ─── ARTIST DETAIL LAYOUT ───────────────────────────── */
+.artist-detail-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.side-title-col {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  padding: 40px;
+  border-right: 1px solid #333;
+  display: flex;
+  justify-content: center;
+  min-width: 80px;
+  flex-shrink: 0;
+}
+
+.artist-main-content {
+  flex: 1;
+  padding: clamp(20px, 5%, 60px) clamp(16px, 5%, 80px) 80px;
+  min-width: 0;
+}
+
+/* ─── IMAGE FRAME ────────────────────────────────────── */
+.image-frame-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  margin-bottom: 40px;
+}
+
+.image-frame-wrapper img {
+  width: 100%;
+  filter: sepia(0.2) brightness(0.9);
+  border-radius: 4px;
+  position: relative;
+  z-index: 1;
+}
+
+.image-frame-deco {
+  position: absolute;
+  top: -14px;
+  left: -14px;
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--accent);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ─── MOBILE BREAKPOINTS ─────────────────────────────── */
 @media (max-width: 768px) {
+  /* Nav */
   .menu-toggle {
     display: flex !important;
   }
@@ -327,61 +383,94 @@ a {
     background: rgba(5, 5, 5, 0.98);
     justify-content: center;
     align-items: center;
-    gap: 30px;
+    gap: 28px;
     z-index: 9998;
+    overflow: hidden;
   }
 
   .nav-links.open {
     display: flex;
   }
 
-  .nav-item {
-    font-size: 1.5rem;
+  .nav-links .nav-item {
+    font-size: 1.4rem;
+    letter-spacing: 2px;
   }
 
+  /* Home hero */
+  .hero-title {
+    font-size: clamp(1.6rem, 8vw, 4rem) !important;
+    letter-spacing: 2px !important;
+    text-align: center;
+    white-space: nowrap;
+    padding: 0;
+  }
+
+  /* Artists split */
   .split-showcase {
     flex-direction: column;
     height: auto;
   }
 
   .artist-panel {
-    height: 60vh;
+    height: 55vw;
+    min-height: 240px;
     width: 100%;
     border-right: none;
     border-bottom: 1px solid rgba(255,255,255,0.1);
   }
 
-  .artist-name {
-    font-size: 3rem !important;
+  /* Artist detail */
+  .artist-detail-layout {
+    flex-direction: column;
   }
 
-  .series-item {
+  .side-title-col {
+    display: none;
+  }
+
+  .image-frame-deco {
+    top: -8px;
+    left: -8px;
+  }
+
+  /* Series list */
+  .series-item-row {
     flex-direction: column !important;
-    padding: 80px 5% !important;
-    gap: 30px !important;
-    text-align: center;
+    padding: 80px 5% 50px !important;
     min-height: auto !important;
+    gap: 24px !important;
+    align-items: flex-start !important;
   }
 
-  .series-image-wrapper {
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-  }
-
-  .series-title {
-    font-size: 2.2rem !important;
-  }
-
-  .photo-dump-grid {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 15px !important;
-  }
-
-  .dump-item {
+  .series-item-row > * {
+    flex-basis: auto !important;
     width: 100% !important;
-    height: 300px !important;
+    max-width: 100% !important;
+  }
+
+  .series-title-text {
+    font-size: clamp(2rem, 8vw, 2.8rem) !important;
+  }
+
+  /* Bento grids */
+  .bento-grid {
+    grid-template-columns: 1fr 1fr !important;
+    grid-auto-rows: clamp(130px, 28vw, 200px) !important;
+    gap: 8px !important;
+  }
+
+  .bento-grid > div {
+    grid-column: span 1 !important;
+    grid-row: span 1 !important;
+    border-radius: 10px !important;
+  }
+
+  /* Gallery grid */
+  .photo-dump-grid {
+    grid-template-columns: 1fr 1fr !important;
+    grid-auto-rows: clamp(130px, 28vw, 200px) !important;
+    gap: 8px !important;
   }
 
   .dump-item.large,
@@ -389,21 +478,33 @@ a {
   .dump-item.wide {
     grid-column: span 1 !important;
     grid-row: span 1 !important;
-    height: 350px !important;
-    width: 100% !important;
   }
 
-  .hero .title {
-    font-size: 3rem !important;
+  /* Maniac grid */
+  .maniac-grid {
+    grid-template-columns: 1fr 1fr !important;
+    grid-auto-rows: clamp(140px, 35vw, 220px) !important;
   }
 
-  .hero .subtitle {
-    font-size: 1rem !important;
+  .maniac-grid > div {
+    grid-column: span 1 !important;
+    grid-row: span 1 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .artist-panel {
+    height: 65vw;
+    min-height: 200px;
   }
 
   .bento-grid {
-    grid-template-columns: 1fr 1fr !important;
-    grid-auto-rows: 160px !important;
-    gap: 10px !important;
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: clamp(180px, 55vw, 260px) !important;
+  }
+
+  .photo-dump-grid {
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: clamp(200px, 60vw, 280px) !important;
   }
 }

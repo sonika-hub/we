@@ -8,11 +8,7 @@ export default function Gallery() {
       const gsap = (window as any).gsap;
       gsap.registerPlugin((window as any).ScrollTrigger);
       gsap.from(".dump-item", {
-        scrollTrigger: {
-          trigger: ".photo-dump-grid",
-          start: "top 85%",
-          toggleActions: "play none none reverse"
-        },
+        scrollTrigger: { trigger: ".photo-dump-grid", start: "top 85%", toggleActions: "play none none reverse" },
         y: 40, opacity: 0, duration: 1, stagger: 0.1, ease: "power2.out"
       });
     }
@@ -31,16 +27,22 @@ export default function Gallery() {
   ];
 
   return (
-    <div className="gallery-page" style={{ background: "#050505", color: "#fff", display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+    <div style={{ background: "#050505", color: "#fff", display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <Navbar />
-      <section style={{ padding: "120px 5% 40px", textAlign: "center" }}>
-        <h1 style={{ fontFamily: "'Syne'", fontSize: "clamp(2rem, 8vw, 5rem)", opacity: 0.2, letterSpacing: "15px" }}>MOMENTS</h1>
+      <section style={{ padding: "clamp(90px, 15vw, 140px) 5% clamp(20px, 4vw, 40px)", textAlign: "center" }}>
+        <h1 style={{
+          fontFamily: "'Syne'",
+          fontSize: "clamp(1.8rem, 8vw, 5rem)",
+          opacity: 0.2,
+          letterSpacing: "clamp(6px, 2vw, 15px)",
+          wordBreak: "break-word"
+        }}>MOMENTS</h1>
       </section>
-      <section style={{ padding: "0 20px 100px", flex: 1 }}>
+      <section style={{ padding: "0 clamp(12px, 3vw, 20px) clamp(60px, 10vw, 100px)", flex: 1 }}>
         <div className="photo-dump-grid">
           {items.map(({ src, cls }, i) => (
             <div key={i} className={`dump-item${cls ? " " + cls : ""}`}>
-              <img src={src} alt="Gallery" />
+              <img src={src} alt="Gallery" loading="lazy" />
             </div>
           ))}
         </div>

@@ -371,6 +371,189 @@ img {
   gap: 14px;
 }
 
+/* ── Timeline ─────────────────────────────────────── */
+.tl-track {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.tl-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(0,242,254,0.3) 10%, rgba(0,242,254,0.15) 90%, transparent);
+  transform: translateX(-50%);
+}
+
+.tl-card {
+  display: grid;
+  grid-template-columns: 1fr 40px 1fr;
+  align-items: start;
+  gap: 0 0;
+  margin-bottom: clamp(40px, 6vw, 70px);
+  position: relative;
+}
+
+.tl-card-left .tl-date  { grid-column: 1; grid-row: 1; text-align: right; padding-right: 28px; padding-top: 20px; }
+.tl-card-left .tl-dot   { grid-column: 2; grid-row: 1; }
+.tl-card-left .tl-box   { grid-column: 3; grid-row: 1; padding-left: 28px; }
+
+.tl-card-right .tl-box  { grid-column: 1; grid-row: 1; padding-right: 28px; }
+.tl-card-right .tl-dot  { grid-column: 2; grid-row: 1; }
+.tl-card-right .tl-date { grid-column: 3; grid-row: 1; text-align: left; padding-left: 28px; padding-top: 20px; }
+
+.tl-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin: 22px auto 0;
+  border: 2px solid #050505;
+  box-shadow: 0 0 12px currentColor;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.tl-date {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tl-date-month {
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.tl-date-year {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  opacity: 0.18;
+  line-height: 1;
+}
+
+.tl-box {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.tl-box:hover {
+  border-color: rgba(255,255,255,0.12);
+  transform: translateY(-3px);
+}
+
+.tl-box-upcoming {
+  border-color: rgba(255,59,59,0.25);
+}
+
+.tl-box-upcoming:hover {
+  border-color: rgba(255,59,59,0.5);
+}
+
+.tl-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.tl-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 0.6s ease;
+  filter: brightness(0.85) saturate(0.9);
+}
+
+.tl-box:hover .tl-img {
+  transform: scale(1.04);
+}
+
+.tl-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(5,5,5,0.7) 0%, transparent 60%);
+}
+
+.tl-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+
+.tl-upcoming-badge {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  font-weight: 800;
+  text-transform: uppercase;
+  background: #ff3b3b;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.tl-text {
+  padding: clamp(16px, 3vw, 24px) clamp(16px, 3vw, 24px) clamp(20px, 3vw, 28px);
+}
+
+.tl-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 10px;
+  line-height: 1.3;
+}
+
+.tl-desc {
+  font-size: clamp(0.8rem, 1.8vw, 0.88rem);
+  opacity: 0.55;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Timeline mobile */
+@media (max-width: 700px) {
+  .tl-line { left: 20px; }
+
+  .tl-card {
+    grid-template-columns: 40px 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .tl-card-left .tl-dot,
+  .tl-card-right .tl-dot  { grid-column: 1; grid-row: 1; margin: 20px auto 0; }
+
+  .tl-card-left .tl-date,
+  .tl-card-right .tl-date { grid-column: 2; grid-row: 1; text-align: left; padding: 16px 0 0 12px; }
+
+  .tl-card-left .tl-box,
+  .tl-card-right .tl-box  { grid-column: 1 / -1; grid-row: 2; padding: 0 0 0 40px !important; }
+}
+
 /* ── Social Pills ─────────────────────────────────── */
 .social-links-section {
   margin-bottom: 60px;

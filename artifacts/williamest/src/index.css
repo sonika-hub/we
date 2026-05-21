@@ -618,6 +618,17 @@ img {
     left: -8px;
   }
 
+  /* Music page */
+  .song-cards-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  .song-card-inner {
+    min-height: auto !important;
+    padding: 28px 24px !important;
+  }
+
   /* Series list */
   .series-item-row {
     flex-direction: column !important;

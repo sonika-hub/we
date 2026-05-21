@@ -34,6 +34,7 @@ export default function Navbar() {
         <Link href="/" className="nav-item" onClick={() => { setMenuOpen(false); document.body.style.overflow = ""; }}>Home</Link>
         <Link href="/artists" className="nav-item" onClick={() => { setMenuOpen(false); document.body.style.overflow = ""; }}>Artists</Link>
         <Link href="/gallery" className="nav-item" onClick={() => { setMenuOpen(false); document.body.style.overflow = ""; }}>Gallery</Link>
+        <Link href="/music" className="nav-item" onClick={() => { setMenuOpen(false); document.body.style.overflow = ""; }}>Music</Link>
         <Link href="/series" className="nav-item" onClick={() => { setMenuOpen(false); document.body.style.overflow = ""; }}>Series</Link>
         <Link href="/about" className="nav-item" onClick={() => { setMenuOpen(false); document.body.style.overflow = ""; }}>About</Link>
       </div>

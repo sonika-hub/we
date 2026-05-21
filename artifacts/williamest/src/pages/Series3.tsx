@@ -1,20 +1,26 @@
-import { useEffect } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Lightbox from "../components/Lightbox";
+
+const archiveImages = [
+  "/images/youmaniac1.jpg",
+  "/images/youmaniac2.jpg",
+  "/images/youmaniac3.jpg",
+  "/images/youmaniac4.jpg",
+  "/images/youmaniac5.jpg",
+];
 
 export default function Series3() {
+  const [lbIndex, setLbIndex] = useState<number | null>(null);
+  const close = useCallback(() => setLbIndex(null), []);
+  const prev = useCallback(() => setLbIndex(i => i !== null ? (i - 1 + archiveImages.length) % archiveImages.length : null), []);
+  const next = useCallback(() => setLbIndex(i => i !== null ? (i + 1) % archiveImages.length : null), []);
+
   useEffect(() => {
     if (typeof window !== "undefined" && (window as any).gsap && (window as any).ScrollTrigger) {
       const gsap = (window as any).gsap;
       gsap.registerPlugin((window as any).ScrollTrigger);
-      gsap.from(".cast-card", {
-        scrollTrigger: { trigger: ".cast-section", start: "top 70%" },
-        y: 100, opacity: 0, stagger: 0.3, duration: 1.2, ease: "power4.out"
-      });
-      gsap.from(".maniac-grid-item", {
-        scrollTrigger: { trigger: ".maniac-grid", start: "top 75%" },
-        y: 60, opacity: 0, stagger: 0.12, duration: 1, ease: "power3.out"
-      });
     }
   }, []);
 
@@ -94,41 +100,32 @@ export default function Series3() {
             gridAutoRows: "clamp(130px, 16vw, 240px)",
             gap: "clamp(8px, 1.2vw, 16px)",
           }}>
-            <div className="maniac-grid-item" style={{ gridColumn: "span 7", gridRow: "span 2", overflow: "hidden", borderRadius: "clamp(10px, 1.5vw, 18px)", background: "#111" }}>
-              <img src="/images/youmaniac1.jpg" alt="You Maniac"
-                style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.8s cubic-bezier(0.2,1,0.3,1)" }}
-                onMouseEnter={e => ((e.currentTarget as HTMLImageElement).style.transform = "scale(1.06)")}
-                onMouseLeave={e => ((e.currentTarget as HTMLImageElement).style.transform = "scale(1)")} />
-            </div>
-            <div className="maniac-grid-item" style={{ gridColumn: "span 5", gridRow: "span 2", overflow: "hidden", borderRadius: "clamp(10px, 1.5vw, 18px)", background: "#111" }}>
-              <img src="/images/youmaniac2.jpg" alt="You Maniac"
-                style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.8s cubic-bezier(0.2,1,0.3,1)" }}
-                onMouseEnter={e => ((e.currentTarget as HTMLImageElement).style.transform = "scale(1.06)")}
-                onMouseLeave={e => ((e.currentTarget as HTMLImageElement).style.transform = "scale(1)")} />
-            </div>
-            <div className="maniac-grid-item" style={{ gridColumn: "span 4", overflow: "hidden", borderRadius: "clamp(10px, 1.5vw, 18px)", background: "#111" }}>
-              <img src="/images/youmaniac3.jpg" alt="You Maniac"
-                style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.8s cubic-bezier(0.2,1,0.3,1)" }}
-                onMouseEnter={e => ((e.currentTarget as HTMLImageElement).style.transform = "scale(1.06)")}
-                onMouseLeave={e => ((e.currentTarget as HTMLImageElement).style.transform = "scale(1)")} />
-            </div>
-            <div className="maniac-grid-item" style={{ gridColumn: "span 4", overflow: "hidden", borderRadius: "clamp(10px, 1.5vw, 18px)", background: "#111" }}>
-              <img src="/images/youmaniac4.jpg" alt="You Maniac"
-                style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.8s cubic-bezier(0.2,1,0.3,1)" }}
-                onMouseEnter={e => ((e.currentTarget as HTMLImageElement).style.transform = "scale(1.06)")}
-                onMouseLeave={e => ((e.currentTarget as HTMLImageElement).style.transform = "scale(1)")} />
-            </div>
-            <div className="maniac-grid-item" style={{ gridColumn: "span 4", overflow: "hidden", borderRadius: "clamp(10px, 1.5vw, 18px)", background: "#111" }}>
-              <img src="/images/youmaniac5.jpg" alt="You Maniac"
-                style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.8s cubic-bezier(0.2,1,0.3,1)" }}
-                onMouseEnter={e => ((e.currentTarget as HTMLImageElement).style.transform = "scale(1.06)")}
-                onMouseLeave={e => ((e.currentTarget as HTMLImageElement).style.transform = "scale(1)")} />
-            </div>
+            {[
+              { col: "span 7", row: "span 2", idx: 0 },
+              { col: "span 5", row: "span 2", idx: 1 },
+              { col: "span 4", row: undefined, idx: 2 },
+              { col: "span 4", row: undefined, idx: 3 },
+              { col: "span 4", row: undefined, idx: 4 },
+            ].map(({ col, row, idx }) => (
+              <div
+                key={idx}
+                className="maniac-grid-item series-lb-item"
+                style={{ gridColumn: col, gridRow: row, overflow: "hidden", borderRadius: "clamp(10px, 1.5vw, 18px)", background: "#111" }}
+                onClick={() => setLbIndex(idx)}
+              >
+                <img src={archiveImages[idx]} alt="You Maniac"
+                  style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.8s cubic-bezier(0.2,1,0.3,1)" }}
+                  onMouseEnter={e => ((e.currentTarget as HTMLImageElement).style.transform = "scale(1.06)")}
+                  onMouseLeave={e => ((e.currentTarget as HTMLImageElement).style.transform = "scale(1)")} />
+                <div className="gallery-hover-hint"><i className="fas fa-expand" style={{ fontSize: "1.2rem", color: "#fff" }}></i></div>
+              </div>
+            ))}
           </div>
         </section>
 
       </main>
       <Footer />
+      {lbIndex !== null && <Lightbox images={archiveImages} index={lbIndex} onClose={close} onPrev={prev} onNext={next} />}
     </div>
   );
 }

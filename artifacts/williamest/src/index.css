@@ -871,6 +871,11 @@ img {
   grid-column: span 2;
 }
 
+.series-lb-item {
+  position: relative;
+  cursor: pointer;
+}
+
 .gallery-hover-hint {
   position: absolute;
   inset: 0;
@@ -1008,6 +1013,7 @@ img {
   overflow: hidden;
   background: #111;
   border-radius: 16px;
+  position: relative;
 }
 
 .bento-grid .grid-item img {

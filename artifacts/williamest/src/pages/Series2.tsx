@@ -1,17 +1,27 @@
-import { useEffect } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Lightbox from "../components/Lightbox";
+
+const archiveImages = [
+  "/images/me_thee1.jpg",
+  "/images/me_thee2.jpg",
+  "/images/me_thee3.jpg",
+  "/images/me_thee4.jpg",
+  "/images/me_thee5.jpg",
+  "/images/me_thee6.jpg",
+];
 
 export default function Series2() {
+  const [lbIndex, setLbIndex] = useState<number | null>(null);
+  const close = useCallback(() => setLbIndex(null), []);
+  const prev = useCallback(() => setLbIndex(i => i !== null ? (i - 1 + archiveImages.length) % archiveImages.length : null), []);
+  const next = useCallback(() => setLbIndex(i => i !== null ? (i + 1) % archiveImages.length : null), []);
+
   useEffect(() => {
     if (typeof window !== "undefined" && (window as any).gsap && (window as any).ScrollTrigger) {
       const gsap = (window as any).gsap;
       gsap.registerPlugin((window as any).ScrollTrigger);
-
-      gsap.from(".bento-grid .grid-item", {
-        scrollTrigger: { trigger: ".photo-dump", start: "top 70%" },
-        y: 50, opacity: 0, stagger: 0.1, duration: 0.8, ease: "power2.out"
-      });
 
       const card = document.querySelector('.glass-card');
       const thumbs = document.querySelectorAll('.p-card');
@@ -65,16 +75,24 @@ export default function Series2() {
         <section className="photo-dump" style={{ padding: "clamp(40px, 8vw, 100px) clamp(16px, 5%, 10%)" }}>
           <h2 style={{ fontFamily: "'Syne'", fontSize: "clamp(1.4rem, 4vw, 2.5rem)", marginBottom: "clamp(20px, 4vw, 50px)" }}>VISUAL ARCHIVE</h2>
           <div className="bento-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gridAutoRows: "clamp(120px, 18vw, 250px)", gap: "clamp(8px, 1.5vw, 20px)" }}>
-            <div className="grid-item" style={{ gridColumn: "span 2", gridRow: "span 2" }}><img src="/images/me_thee1.jpg" alt="" /></div>
-            <div className="grid-item" style={{ gridRow: "span 2" }}><img src="/images/me_thee2.jpg" alt="" /></div>
-            <div className="grid-item"><img src="/images/me_thee3.jpg" alt="" /></div>
-            <div className="grid-item"><img src="/images/me_thee4.jpg" alt="" /></div>
-            <div className="grid-item" style={{ gridColumn: "span 3" }}><img src="/images/me_thee5.jpg" alt="" /></div>
-            <div className="grid-item"><img src="/images/me_thee6.jpg" alt="" /></div>
+            {[
+              { style: { gridColumn: "span 2", gridRow: "span 2" }, idx: 0 },
+              { style: { gridRow: "span 2" }, idx: 1 },
+              { style: {}, idx: 2 },
+              { style: {}, idx: 3 },
+              { style: { gridColumn: "span 3" }, idx: 4 },
+              { style: {}, idx: 5 },
+            ].map(({ style, idx }) => (
+              <div key={idx} className="grid-item series-lb-item" style={style} onClick={() => setLbIndex(idx)}>
+                <img src={archiveImages[idx]} alt="" />
+                <div className="gallery-hover-hint"><i className="fas fa-expand" style={{ fontSize: "1.2rem", color: "#fff" }}></i></div>
+              </div>
+            ))}
           </div>
         </section>
       </main>
       <Footer />
+      {lbIndex !== null && <Lightbox images={archiveImages} index={lbIndex} onClose={close} onPrev={prev} onNext={next} />}
     </div>
   );
 }

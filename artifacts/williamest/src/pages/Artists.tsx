@@ -9,8 +9,12 @@ export default function Artists() {
   useEffect(() => {
     if (typeof window !== "undefined" && (window as any).gsap) {
       const gsap = (window as any).gsap;
-      gsap.from(".panel-left", { xPercent: -100, duration: 1.5, ease: "power4.inOut" });
-      gsap.from(".panel-right", { xPercent: 100, duration: 1.5, ease: "power4.inOut" }, "<");
+      if (window.innerWidth <= 768) {
+        gsap.from(".artist-panel", { opacity: 0, y: 40, duration: 1, stagger: 0.2, ease: "power3.out" });
+      } else {
+        gsap.from(".panel-left", { xPercent: -100, duration: 1.5, ease: "power4.inOut" });
+        gsap.from(".panel-right", { xPercent: 100, duration: 1.5, ease: "power4.inOut" }, "<");
+      }
 
       (window as any).gsap.utils.toArray('.artist-panel').forEach((panel: Element) => {
         const bg = panel.querySelector('.panel-bg') as HTMLElement;

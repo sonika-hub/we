@@ -2,13 +2,40 @@ import { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
+const socials = [
+  {
+    href: "https://www.instagram.com/williamjkp/",
+    icon: "fa-instagram",
+    label: "Instagram",
+    handle: "@williamjkp",
+    color: "#e1306c",
+    bg: "rgba(225,48,108,0.1)",
+  },
+  {
+    href: "https://x.com/Williamjkp1",
+    icon: "fa-x-twitter",
+    label: "X",
+    handle: "@Williamjkp1",
+    color: "#fff",
+    bg: "rgba(255,255,255,0.07)",
+  },
+  {
+    href: "https://www.tiktok.com/@william_jkp1",
+    icon: "fa-tiktok",
+    label: "TikTok",
+    handle: "@william_jkp1",
+    color: "#69c9d0",
+    bg: "rgba(105,201,208,0.1)",
+  },
+];
+
 export default function Artist1() {
   useEffect(() => {
     if (typeof window !== "undefined" && (window as any).gsap) {
       const gsap = (window as any).gsap;
       gsap.from(".image-frame-wrapper", { duration: 2, x: -50, opacity: 0, ease: "power4.out" });
       gsap.from(".side-title-col h1", { duration: 1.5, y: 100, opacity: 0, delay: 0.5 });
-      gsap.from(".social-links", { duration: 1, y: 20, opacity: 0, delay: 1 });
+      gsap.from(".social-pill", { duration: 0.6, y: 16, stagger: 0.12, delay: 1, ease: "power3.out" });
     }
   }, []);
 
@@ -36,21 +63,27 @@ export default function Artist1() {
               Outside of music and acting, William is huge online — millions of followers, nonstop trending tags, viral TikToks, and fanmeets that sell out from Bangkok to Tokyo under the WilliamEst name. At just 20 years old, he became the CEO of his own clothing brand Zaven.
             </p>
 
-            <div className="social-links" style={{ display: "flex", gap: "clamp(16px, 4vw, 30px)", alignItems: "center", flexWrap: "wrap", marginBottom: "60px" }}>
-              {[
-                { href: "https://www.instagram.com/williamjkp/", icon: "fa-instagram" },
-                { href: "https://x.com/Williamjkp1", icon: "fa-x-twitter" },
-                { href: "https://www.tiktok.com/@william_jkp1", icon: "fa-tiktok" },
-              ].map(({ href, icon }) => (
-                <a key={icon} href={href} target="_blank" rel="noreferrer"
-                  style={{ color: "#fff", fontSize: "clamp(1.2rem, 3vw, 1.5rem)", transition: "0.3s" }}
-                  onMouseEnter={e => { (e.currentTarget.style.color = "#00f2fe"); (e.currentTarget.style.transform = "scale(1.2)"); }}
-                  onMouseLeave={e => { (e.currentTarget.style.color = "#fff"); (e.currentTarget.style.transform = "scale(1)"); }}>
-                  <i className={`fab ${icon}`}></i>
-                </a>
-              ))}
-              <div style={{ height: "1px", width: "40px", background: "rgba(255,255,255,0.2)" }}></div>
-              <span style={{ fontFamily: "'Syne'", fontSize: "0.75rem", letterSpacing: "3px", opacity: 0.5 }}>FOLLOW</span>
+            <div className="social-links-section">
+              <span className="social-follow-label">Follow William</span>
+              <div className="social-pills-row">
+                {socials.map(({ href, icon, label, handle, color, bg }) => (
+                  <a
+                    key={icon}
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="social-pill"
+                    style={{ "--pill-color": color, "--pill-bg": bg } as React.CSSProperties}
+                  >
+                    <i className={`fab ${icon} social-pill-icon`}></i>
+                    <div className="social-pill-text">
+                      <span className="social-pill-platform">{label}</span>
+                      <span className="social-pill-handle">{handle}</span>
+                    </div>
+                    <i className="fas fa-arrow-up-right-from-square social-pill-arrow"></i>
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>

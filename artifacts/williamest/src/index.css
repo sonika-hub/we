@@ -371,6 +371,92 @@ img {
   gap: 14px;
 }
 
+/* ── Social Pills ─────────────────────────────────── */
+.social-links-section {
+  margin-bottom: 60px;
+}
+
+.social-follow-label {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.social-pills-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 380px;
+}
+
+.social-pill {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: var(--pill-bg, rgba(255,255,255,0.05));
+  border: 1px solid rgba(255,255,255,0.07);
+  text-decoration: none;
+  color: #fff;
+  transition: background 0.25s, border-color 0.25s, transform 0.25s;
+  cursor: pointer;
+}
+
+.social-pill:hover {
+  background: var(--pill-bg, rgba(255,255,255,0.1));
+  border-color: var(--pill-color, rgba(255,255,255,0.2));
+  transform: translateX(4px);
+}
+
+.social-pill-icon {
+  font-size: 1.25rem;
+  color: var(--pill-color, #fff);
+  width: 22px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.social-pill-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.social-pill-platform {
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--pill-color, #fff);
+  opacity: 0.8;
+}
+
+.social-pill-handle {
+  font-size: 0.88rem;
+  opacity: 0.6;
+  font-family: 'Outfit', sans-serif;
+}
+
+.social-pill-arrow {
+  font-size: 0.65rem;
+  opacity: 0;
+  color: var(--pill-color, #fff);
+  transition: opacity 0.2s, transform 0.2s;
+  transform: translateX(-4px);
+  flex-shrink: 0;
+}
+
+.social-pill:hover .social-pill-arrow {
+  opacity: 0.6;
+  transform: translateX(0);
+}
+
 /* ── Thumbnail button ──────────────────────────────── */
 .song-thumb-btn {
   position: relative;

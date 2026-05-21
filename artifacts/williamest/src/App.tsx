@@ -6,7 +6,6 @@ import Artist1 from "@/pages/Artist1";
 import Artist2 from "@/pages/Artist2";
 import Gallery from "@/pages/Gallery";
 import Music from "@/pages/Music";
-import Timeline from "@/pages/Timeline";
 import Series from "@/pages/Series";
 import Series1 from "@/pages/Series1";
 import Series2 from "@/pages/Series2";
@@ -31,7 +30,6 @@ function Router() {
       <Route path="/artists/2" component={Artist2} />
       <Route path="/gallery" component={Gallery} />
       <Route path="/music" component={Music} />
-      <Route path="/timeline" component={Timeline} />
       <Route path="/series" component={Series} />
       <Route path="/series/1" component={Series1} />
       <Route path="/series/2" component={Series2} />

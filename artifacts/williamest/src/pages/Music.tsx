@@ -19,7 +19,7 @@ const songs = [
     title: "Love Echo",
     type: "Original",
     youtubeId: "GGcXqB4_ZPc",
-    description: "An original track that captures the electric chemistry between William and Est in every note.",
+    description: "The rhythm my heart will always choose, Is every little beat that echoes you.",
     accentColor: "#00f2fe",
     gradientFrom: "#001a2a",
     gradientTo: "#0d0d0d",

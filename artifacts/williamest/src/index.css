@@ -1132,18 +1132,23 @@ img {
   .split-showcase {
     flex-direction: column;
     height: auto;
-    padding-top: 64px;
+    padding-top: 60px;
   }
 
   .artist-panel {
-    height: auto;
-    min-height: 260px;
-    padding: 32px 24px 36px;
+    height: 48vh;
+    min-height: 220px;
+    max-height: 360px;
+    padding: 24px 22px 28px;
     width: 100%;
     border-right: none;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
     justify-content: flex-end;
     align-items: flex-start;
+  }
+
+  .panel-bg {
+    filter: grayscale(60%) brightness(0.5) !important;
   }
 
   .panel-content {
@@ -1158,25 +1163,51 @@ img {
     opacity: 1 !important;
     transform: translateY(0) !important;
     max-width: 100%;
-    font-size: 0.85rem;
-    margin: 10px 0 0;
+    font-size: 0.8rem;
+    margin: 6px 0 0;
+    line-height: 1.5;
+    opacity: 0.7 !important;
   }
 
   .artist-name {
-    font-size: clamp(2.2rem, 11vw, 3.2rem);
-    line-height: 0.95;
+    font-size: clamp(2rem, 10vw, 2.8rem);
+    line-height: 0.92;
   }
 
   .artist-number {
-    font-size: 0.85rem;
-    margin-bottom: 6px;
+    font-size: 0.75rem;
+    margin-bottom: 4px;
+    letter-spacing: 4px;
   }
 
   .view-works {
-    display: inline-block;
-    margin-top: 14px;
-    padding: 8px 20px;
-    font-size: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--accent);
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .view-works::after {
+    content: "→";
+    font-size: 0.9rem;
+    transition: transform 0.2s;
+  }
+
+  .view-works:hover {
+    background: none;
+    color: #fff;
+  }
+
+  .view-works:hover::after {
+    transform: translateX(4px);
   }
 
   /* Artist detail */

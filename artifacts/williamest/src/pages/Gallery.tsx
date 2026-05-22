@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Lightbox from "../components/Lightbox";
 
 const items: Array<{ src: string; cls?: string }> = [
   { src: "/images/couple1.jpg", cls: "large" },
@@ -14,27 +15,13 @@ const items: Array<{ src: string; cls?: string }> = [
   { src: "/images/couple9.jpg", cls: "wide" },
 ];
 
+const images = items.map(i => i.src);
+
 export default function Gallery() {
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-
-  const close = useCallback(() => setLightboxIndex(null), []);
-  const prev = useCallback(() => setLightboxIndex(i => i !== null ? (i - 1 + items.length) % items.length : null), []);
-  const next = useCallback(() => setLightboxIndex(i => i !== null ? (i + 1) % items.length : null), []);
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") close();
-      if (e.key === "ArrowLeft") prev();
-      if (e.key === "ArrowRight") next();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [close, prev, next]);
-
-  useEffect(() => {
-    document.body.style.overflow = lightboxIndex !== null ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [lightboxIndex]);
+  const [lbIndex, setLbIndex] = useState<number | null>(null);
+  const close = useCallback(() => setLbIndex(null), []);
+  const prev = useCallback(() => setLbIndex(i => i !== null ? (i - 1 + images.length) % images.length : null), []);
+  const next = useCallback(() => setLbIndex(i => i !== null ? (i + 1) % images.length : null), []);
 
   useEffect(() => {
     if (typeof window !== "undefined" && (window as any).gsap && (window as any).ScrollTrigger) {
@@ -67,7 +54,7 @@ export default function Gallery() {
             <div
               key={i}
               className={`dump-item${cls ? " " + cls : ""}`}
-              onClick={() => setLightboxIndex(i)}
+              onClick={() => setLbIndex(i)}
               style={{ cursor: "pointer" }}
             >
               <img src={src} alt="Gallery" loading="lazy" />
@@ -81,37 +68,8 @@ export default function Gallery() {
 
       <Footer />
 
-      {/* Lightbox */}
-      {lightboxIndex !== null && (
-        <div className="lb-overlay" onClick={close}>
-          <div className="lb-inner" onClick={e => e.stopPropagation()}>
-
-            {/* Back button */}
-            <button className="lb-back-btn" onClick={close} aria-label="Close">
-              <i className="fas fa-arrow-left"></i>
-              <span>Back</span>
-            </button>
-
-            {/* Counter */}
-            <div className="lb-counter">{lightboxIndex + 1} / {items.length}</div>
-
-            {/* Image */}
-            <img
-              key={lightboxIndex}
-              src={items[lightboxIndex].src}
-              alt="Full size"
-              className="lb-img"
-            />
-
-            {/* Prev / Next arrows */}
-            <button className="lb-arrow lb-arrow-prev" onClick={prev} aria-label="Previous">
-              <i className="fas fa-chevron-left"></i>
-            </button>
-            <button className="lb-arrow lb-arrow-next" onClick={next} aria-label="Next">
-              <i className="fas fa-chevron-right"></i>
-            </button>
-          </div>
-        </div>
+      {lbIndex !== null && (
+        <Lightbox images={images} index={lbIndex} onClose={close} onPrev={prev} onNext={next} />
       )}
     </div>
   );
